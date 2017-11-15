@@ -17,12 +17,14 @@ const prodLog: ILog = {
 
 export function setFilter(filter = '/*'): void {
   process.env.DEBUG = filter
+  require('debug').enable(process.env.DEBUG)
   if (typeof localStorage !== 'object' || localStorage == null) { return }
   localStorage.setItem('debug', filter)
 }
 
 export function removeFilter(): void {
   delete process.env.DEBUG
+  require('debug').enable(process.env.DEBUG)
   if (typeof localStorage !== 'object' || localStorage == null) { return }
   localStorage.removeItem('debug')
 }
