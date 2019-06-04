@@ -1,6 +1,6 @@
 {
   "name": "@whitetrefoil/debug-log",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A log utility library base on \"debug\".",
   "main": "lib/common/main.js",
   "module": "lib/esm/main.js",

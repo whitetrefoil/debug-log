@@ -27,6 +27,10 @@ debug('Some debug message')
 Changelog & Roadmap
 -------------------
 
+### v0.1.2
+
+* Upgrade dependencies to suppress Github.
+
 ### v0.1.1
 
 * Reset enable status after set filter (fix issue when there's other modules using "debug", e.g. koa).
