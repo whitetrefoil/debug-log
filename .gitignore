@@ -132,6 +132,8 @@ fabric.properties
 # Scala plugin
 .idea/sbt.xml
 
+.idea/eclipseCodeFormatter.xml
+
 ### Vim template
 # Swap
 [._]*.s[a-v][a-z]
