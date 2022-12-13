@@ -27,6 +27,12 @@ debug('Some debug message')
 Changelog & Roadmap
 -------------------
 
+### v0.2.0
+
+* Major dependencies update.
+* Remove `setFilter()` & `removeFilter()`.
+* Fix `process is undefined`.
+
 ### v0.1.2
 
 * Upgrade dependencies to suppress Github.
