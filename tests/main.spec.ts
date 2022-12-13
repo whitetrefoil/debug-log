@@ -1,3 +1,5 @@
+import {jest} from '@jest/globals'
+
 jest.resetModules()
 
 let env: string

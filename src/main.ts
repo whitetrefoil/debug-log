@@ -1,39 +1,33 @@
+import debug from 'debug'
+
+
+type DebuggerFn = (formatter: unknown, ...args: unknown[]) => void
+
 export interface ILog {
-  debug: Function
+  debug: DebuggerFn
 }
 
-class DevLog implements ILog {
-  debug: any
-
-  constructor(private name: string, debug: any) {
-    this.debug = debug(name)
-    this.debug.log = console.log.bind(console)
+const factoryDevLog = (name: string): ILog => {
+  const d = debug(name)
+  return {
+    debug: (formatter: unknown, ...args: unknown[]) => {
+      d(formatter, ...args)
+    },
   }
 }
 
-const prodLog: ILog = {
-  debug() { return },
-}
-
-export function setFilter(filter = '/*'): void {
-  process.env.DEBUG = filter
-  require('debug').enable(process.env.DEBUG)
-  if (typeof localStorage !== 'object' || localStorage == null) { return }
-  localStorage.setItem('debug', filter)
-}
-
-export function removeFilter(): void {
-  delete process.env.DEBUG
-  require('debug').enable(process.env.DEBUG)
-  if (typeof localStorage !== 'object' || localStorage == null) { return }
-  localStorage.removeItem('debug')
-}
+const factoryProdLog = (): ILog => ({
+  debug: () => undefined,
+})
 
 export function getLogger(name: string): ILog {
-  if (process.env.NODE_ENV === 'development') {
-    // tslint:disable-next-line:no-implicit-dependencies
-    return new DevLog(name, require('debug'))
+  if (typeof process !== 'undefined'
+    && process != null
+    && typeof process.env !== 'undefined'
+    && process.env != null
+    && process.env.NODE_ENV === 'development'
+  ) {
+    return factoryDevLog(name)
   }
-  removeFilter()
-  return prodLog
+  return factoryProdLog()
 }
